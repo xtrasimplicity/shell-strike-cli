@@ -1,9 +1,8 @@
 
 module ShellStrike
-  # Require gems from Gemfile
-  require 'rubygems'
-  require 'bundler/setup'
-  Bundler.require(:default, (ENV['RUBY_ENV'] || ''))
+ 
+  # Require third-party gems
+  require 'net/ssh'
 
   # Require standard libs
   require 'socket'
