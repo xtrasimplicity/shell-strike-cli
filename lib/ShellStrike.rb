@@ -8,6 +8,9 @@ module ShellStrike
   require 'socket'
   require 'ostruct'
 
+  # Require core extensions
+  Dir.glob(File.expand_path(File.join(File.dirname(__FILE__), 'core_ext', '**', '*.rb'))) { |rb| require rb }
+  
   # :stopdoc:
   LIBPATH = ::File.expand_path('..', __FILE__) + ::File::SEPARATOR
   PATH = ::File.dirname(LIBPATH) + ::File::SEPARATOR

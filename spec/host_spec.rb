@@ -68,85 +68,35 @@ describe ShellStrike::Host do
       before { allow(Net::SSH).to receive(:start).and_return(true) }
       subject { host.validate_credentials(username, password) }
 
-      describe '#valid?' do
-        it 'should return true' do
-          expect(subject.valid?).to eq(true)
-        end
-      end
-
-      describe '#error_message' do
-        it 'should not be set' do
-          expect(subject.error_message.empty?).to be(true)
-        end
-      end
+      it { is_expected.to return_a_TaskResult_object.with_a_success_value_of(true).and_no_messages }
     end
 
     context 'when the credentials are invalid' do
       before { allow(Net::SSH).to receive(:start).and_raise(Net::SSH::AuthenticationFailed) }
       subject { host.validate_credentials(username, password) }
 
-      describe '#valid?' do
-        it 'should return false' do
-          expect(subject.valid?).to eq(false)
-        end
-      end
-
-      describe '#error_message' do
-        it 'should be set' do
-          expect(subject.error_message.empty?).to be(false)
-        end
-      end
+      it { is_expected.to return_a_TaskResult_object.with_a_success_value_of(false).and_a_message_matching(/invalid credentials/i) }
     end
 
     context 'when the host is unreachable' do
       before { allow(Net::SSH).to receive(:start).and_raise(Errno::EHOSTUNREACH) }
       subject { host.validate_credentials(username, password) }
 
-      describe '#valid?' do
-        it 'should return false' do
-          expect(subject.valid?).to eq(false)
-        end
-      end
-
-      describe '#error_message' do
-        it 'should be set' do
-          expect(subject.error_message).to match(/no route to host/i)
-        end
-      end
+      it { is_expected.to return_a_TaskResult_object.with_a_success_value_of(false).and_a_message_matching(/no route to host/i) }
     end
 
     context 'when the connection times out' do
       before { allow(Net::SSH).to receive(:start).and_raise(Net::SSH::ConnectionTimeout) }
       subject { host.validate_credentials(username, password) }
 
-      describe '#valid?' do
-        it 'should return false' do
-          expect(subject.valid?).to eq(false)
-        end
-      end
-
-      describe '#error_message' do
-        it 'should be set' do
-          expect(subject.error_message).to match(/connection timed out/i)
-        end
-      end
+      it { is_expected.to return_a_TaskResult_object.with_a_success_value_of(false).and_a_message_matching(/timed out/i) }
     end
 
     context 'when an unexpected SSH error occurs' do
       before { allow(Net::SSH).to receive(:start).and_raise(Net::SSH::Exception) }
       subject { host.validate_credentials(username, password) }
 
-      describe '#valid?' do
-        it 'should return false' do
-          expect(subject.valid?).to eq(false)
-        end
-      end
-
-      describe '#error_message' do
-        it 'should be set' do
-          expect(subject.error_message).to match(/unexpected error occurred/i)
-        end
-      end
+      it { is_expected.to return_a_TaskResult_object.with_a_success_value_of(false).and_a_message_matching(/unexpected error occurred/i) }
     end
   end
 end

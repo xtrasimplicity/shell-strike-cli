@@ -34,6 +34,6 @@ class ShellStrike::Host
       message = "Unable to connect to #{@host}: #{e.message}"
     end
 
-    OpenStruct.new(:valid? => valid, :error_message => message)
+    ShellStrike::TaskResult.new(valid, message)
   end
 end

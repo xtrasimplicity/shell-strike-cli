@@ -5,13 +5,10 @@ require 'rspec'
 require File.expand_path('../../lib/ShellStrike', __FILE__)
 
 RSpec.configure do |config|
-  # == Mock Framework
-  #
-  # RSpec uses it's own mocking framework by default. If you prefer to
-  # use mocha, flexmock or RR, uncomment the appropriate line:
-  #
-  # config.mock_framework = :mocha
-  # config.mock_framework = :flexmock
-  # config.mock_framework = :rr
+  config.expect_with :rspec do |c|
+    c.include_chain_clauses_in_custom_matcher_descriptions = true
+  end
 end
 
+# Require concerns
+Dir.glob(File.expand_path(File.join(File.dirname(__FILE__), 'concerns', '**', '*.rb'))).each { |rb| require rb }
