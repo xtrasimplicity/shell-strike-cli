@@ -1,8 +1,7 @@
-
 require 'rubygems'
 require 'rspec'
 
-require File.expand_path('../../lib/ShellStrike', __FILE__)
+require File.expand_path('../../lib/shell_strike', __FILE__)
 
 RSpec.configure do |config|
   config.expect_with :rspec do |c|
@@ -10,5 +9,5 @@ RSpec.configure do |config|
   end
 end
 
-# Require concerns
-Dir.glob(File.expand_path(File.join(File.dirname(__FILE__), 'concerns', '**', '*.rb'))).each { |rb| require rb }
+# Require support files
+Dir.glob(File.expand_path(File.join(File.dirname(__FILE__), 'support', '**', '*.rb'))).each { |rb| require rb }

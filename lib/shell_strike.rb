@@ -1,4 +1,3 @@
-
 module ShellStrike
  
   # Require third-party gems
