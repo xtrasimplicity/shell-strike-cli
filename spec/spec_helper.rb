@@ -1,5 +1,8 @@
 require 'rubygems'
 require 'rspec'
+require 'simplecov'
+
+SimpleCov.start
 
 require File.expand_path('../../lib/shell_strike', __FILE__)
 
