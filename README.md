@@ -1,6 +1,6 @@
 Shell Strike
 ===========
-[![Build Status](https://travis-ci.org/xtrasimplicity/shell-strike.svg?branch=master)](https://travis-ci.org/xtrasimplicity/shell-strike)
+[![Build Status](https://travis-ci.org/xtrasimplicity/shell-strike.svg?branch=develop)](https://travis-ci.org/xtrasimplicity/shell-strike)
 
 A simple ruby application intended to simplify the discovery of valid credentials for one or more SSH servers running on traditional (22) or non-standard ports, using a user-defined dictionary of usernames and passwords.
 
