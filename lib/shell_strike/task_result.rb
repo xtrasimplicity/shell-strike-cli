@@ -1,16 +1,11 @@
 module ShellStrike
-  class TaskResult
-    def initialize(success_status, *messages)
-      @success_status = success_status
-      @messages = messages
+  class TaskResult < ResultObject::Base
+    def initialize(was_successful, *messages)
+      super
     end
 
     def success?
-      @success_status
-    end
-
-    def error_message
-      @messages.reject_blank.join(' ')
+      boolean_status
     end
   end
 end
